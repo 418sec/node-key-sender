@@ -119,7 +119,6 @@ module.exports = function() {
                     resolve(stdout, stderr);
                 } else {
                     reject(error, stdout, stderr);
-                    console.log('err')
                 }
             });
         });

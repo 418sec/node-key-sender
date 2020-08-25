@@ -1,4 +1,4 @@
-var exec = require('child_process').exec;
+var exec = require('child_process').execFile;
 var path = require("path");
 
 module.exports = function() {
@@ -112,9 +112,9 @@ module.exports = function() {
         return new Promise(function(resolve, reject) {
             var jarPath = path.join(__dirname, 'jar', 'key-sender.jar');
 
-            var command = 'java -jar \"' + jarPath + '\" ' + arrParams.join(' ') + module.getCommandLineOptions();
+            var command = ['-jar', jarPath, arrParams.join(' '), module.getCommandLineOptions()];
 
-            return exec(command, {}, function(error, stdout, stderr) {
+            return exec('java', command, {}, function(error, stdout, stderr) {
                 if (error == null) {
                     resolve(stdout, stderr);
                 } else {
